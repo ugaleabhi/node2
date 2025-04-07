@@ -1,9 +1,21 @@
-const http =require('http');
-const fs=require("fs");
+// const http =require('http');
+// const fs=require("fs");
  const { error } = require('console');
-const url=require("url");
+// const url=require("url");
+const express=require("express");
+const app=express();
+
+app.get('/',(req,res)=>{
+    return res.send('Hello From  Home Page');
+
+})
+app.get('/about',(req,res)=>{
+    return res.send(`Hello ${req.query.name}`)
+    // return res.send('Hello From  About Page'+' hey '+req.query.name+" You are "+req.query.age);
+})
 
 
+function myHandler(req,res){
 const myServer=http.createServer((req,res)=>{
     if(req.url==="/favicon.ico")return res.end();
     const log=`${Date.now()}:${req.method}${req.url}New Req Received\n`;
@@ -36,6 +48,9 @@ const myServer=http.createServer((req,res)=>{
    
 
 });
-myServer.listen(8000, () => console.log('Server Started on port 8000!'));
+}
+app.listen(8000,()=>console.log('Server Started on port 8000!'))
+// const myServer =http.createServer(app);
+// myServer.listen(8000, () => console.log('Server Started on port 8000!'));
 
 
